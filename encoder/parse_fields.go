@@ -116,10 +116,5 @@ func parseName(parts []string, fieldName string) (esName string) {
 }
 
 func isOption(str string) bool {
-	switch str {
-	case tagOptionOmitempty:
-		return true
-	default:
-		return false
-	}
+	return str == tagOptionOmitempty
 }

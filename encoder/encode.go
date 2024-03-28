@@ -105,6 +105,10 @@ func marshalRange(val reflect.Value, info *Field) (elastic.Query, error) {
 	query := elastic.NewRangeQuery(info.esName)
 
 	if err := parseFields(val, func(v reflect.Value, f *Field) error {
+		if f.op.omitempty && IsZero(f.value) {
+			return nil
+		}
+
 		switch f.est {
 		case "gte":
 			query.Gte(f.value)
